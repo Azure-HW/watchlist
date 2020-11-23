@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<!--利用Jinja2可以写出一个通用的模板-->
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
 	<title>{{ name }}'s Watchlist</title>
+	<!--url_for传入端点值和参数，此处为 static/dog.png-->
 	<link rel="icon" href="{{ url_for('static', filename='dog.png') }}">
 </head>
 <body>
@@ -22,3 +24,20 @@
 	</footer>
 </body>
 </html>
+
+<!--利用模板写-->
+{% extends 'base.html' %}
+
+{% block content %}
+<p>{{ movies|length }} Titles</p>
+<ul class="movie-list">
+	{% for movie in movies %}
+	<li>{{ movie.title }} - {{ movie.year }}
+	<span class="stay-right">
+		<a class="imdb" href="http://www.imdb.com/find?q={{movie.title }}" target="_blank" title="Find this movie on IMDb">IMDb</a>
+	</span>
+	</li>
+	{% endfor %}
+</ul>
+<img alt="cat" class="cat" src="{{ url_for('static', filename='images/cat_look.png') }}" title="Look!" />
+{% endblock %}
