@@ -122,5 +122,5 @@ input[name=year] {
 }
 
 .inline-form {
-	display: inline-block;
+    display: inline;
 }
